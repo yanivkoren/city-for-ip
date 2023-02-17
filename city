@@ -1,0 +1,15 @@
+import requests
+import os
+
+def get_city_for_ip(ip_address):
+    #api_key = os.environ.get("IPSTACK_API_KEY")
+    #url = f"http://api.ipstack.com/{ip_address}?access_key={api_key}"
+    url = f'https://api.geoiplookup.net/?query={ip_address}&json=true'
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        city = data["city"]
+        return city
+    else:
+        print("Error: Unable to retrieve city information for the given IP address.")
+        return None
